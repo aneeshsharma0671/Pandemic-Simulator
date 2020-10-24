@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class AgentController : MonoBehaviour
 {
@@ -9,58 +10,118 @@ public class AgentController : MonoBehaviour
 
     public Transform[] Buildings;
     public Transform[] Houses;
+    public Transform lastbuild;
     private Vector3 lastpos;
-    private float t_copy;
-    private float p=0;
+    private float t_copy=0;
+    private bool p=true;
     private int random;
     private float t;
+    private bool record=true;
 
     public GameObject GameManager;
 
     private void Start()
     {
-        agent.SetDestination(Houses[0].position);
-        lastpos = Houses[0].position;
+        cam = Camera.main;
+        GameManager = GameObject.Find("GameManager");
+        for (int i = 0; i < 8; i++)
+        {
+            Buildings[i] = GameObject.Find("WS" + (i+1)).transform;
+            Houses[i] = GameObject.Find("House" + (i+1)).transform;
+        }
+        if (houseLimit(Houses[0]))
+        {
+            initialMove(Houses[0]);
+        }
+        else if (houseLimit(Houses[1]))
+        {
+            initialMove(Houses[1]);
+        }
+        else if(houseLimit(Houses[2]))
+        {
+            initialMove(Houses[2]);
+        }
     }
 
     void Update()
     {
+
         t = GameManager.GetComponent<TimeManager>().t;
-
-        if(t% Mathf.RoundToInt(Random.Range(30.0f, 60.0f)) == 0)
+        if (Vector3.Distance(agent.transform.position,lastpos) < 10)
         {
-            t_copy = t;
-            p = p + 1;
-            random =Mathf.RoundToInt(Random.Range(0.0f , 1.0f));
-            Debug.Log(random);
-            Debug.Log(t_copy);
-          
+            if (record)
+            {
+                t_copy = t;
+                record = false;
+            }
+            if ( t > (t_copy+10))
+            {
+               if(p)
+                {
+                    if (houseLimit(Houses[0]))
+                    {
+                        moveto(Houses[0]);
+                    }
+                    else if (houseLimit(Houses[1]))
+                    {
+                        moveto(Houses[1]);
+                    }
+                    else if (houseLimit(Houses[2]))
+                    {
+                        moveto(Houses[2]);
+                    }
+                       
+                    p = false;
+                }
+               else
+                {
+                    if (houseLimit(Buildings[0]))
+                    {
+                        moveto(Buildings[0]);
+                    }
+                    else if (houseLimit(Buildings[1]))
+                    {
+                        moveto(Buildings[1]);
+                    }
+                    else if(houseLimit(Buildings[2]))
+                    {
+                        moveto(Buildings[2]);
+                    }
+                    p = true;
+                }
+                record = true;
+            }
+
         }
-        if (t > t_copy)
+
+    }
+
+    void moveto(Transform house)
+    {
+        agent.SetDestination(house.position);
+        house.GetComponent<AgentDetection>().num_of_agents++;
+        lastbuild.GetComponent<AgentDetection>().num_of_agents--;
+        lastbuild = house;
+        lastpos = house.position;
+    }
+    void initialMove(Transform house)
+    {
+        agent.SetDestination(house.position);
+        house.GetComponent<AgentDetection>().num_of_agents++;
+        lastbuild = house;
+        lastpos = house.position;
+    }
+    bool houseLimit(Transform house)
+    {
+        if(house.GetComponent<AgentDetection>().num_of_agents < 2)
         {
-            if (p % 2 == 0)
-            {
-                agent.SetDestination(Buildings[random].position);
-            }
-            else
-            {
-                agent.SetDestination(Houses[random].position);
-            }
+            return true;
         }
-
-
-
-
-
-
-        if (Input.GetMouseButtonDown(0))
+        else
         {
-         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-              // agent.SetDestination(hit.point);
-            }
+            return false;
         }
     }
+        
 }
+
