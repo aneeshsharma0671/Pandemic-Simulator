@@ -68,9 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c83664b88db90d42a26b324f6822c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   agent: {fileID: 984005683947116953}
-  Buildings:
+  buildings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -79,7 +78,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  Houses:
+  houses:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -88,7 +87,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  lastbuild: {fileID: 0}
+  lastBuilding: {fileID: 0}
+  not_infected: 1
+  infected: 0
+  cured: 0
+  infected_color: {fileID: 2100000, guid: 1e39dcab3eb3627438ecf8cecbaf471b, type: 2}
   GameManager: {fileID: 0}
 --- !u!54 &3473447594126262223
 Rigidbody:
@@ -117,7 +120,7 @@ GameObject:
   - component: {fileID: 984005684709475675}
   - component: {fileID: 984005684709475678}
   - component: {fileID: 984005684709475673}
-  - component: {fileID: 984005684709475672}
+  - component: {fileID: 6115616479859066402}
   m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
@@ -188,7 +191,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &984005684709475672
+--- !u!136 &6115616479859066402
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,7 +201,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.06
+  m_Height: 2.18
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

@@ -13,6 +13,13 @@ public class AgentDetection : MonoBehaviour
         if(!NoA.Contains(other))
         {
             NoA.Add(other);
+            foreach(var agent in NoA)
+            {
+                if(CheckInfection(agent))
+                {
+                  other.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infect();
+                }
+            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -21,5 +28,9 @@ public class AgentDetection : MonoBehaviour
         {
             NoA.Remove(other);
         }
+    }
+   public bool CheckInfection(Collider agent)
+    {
+       return agent.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infected;
     }
 }
