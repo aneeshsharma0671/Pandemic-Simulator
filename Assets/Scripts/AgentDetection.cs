@@ -31,6 +31,6 @@ public class AgentDetection : MonoBehaviour
     }
    public bool CheckInfection(Collider agent)
     {
-       return agent.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infected;
+        return agent.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infected;
     }
 }

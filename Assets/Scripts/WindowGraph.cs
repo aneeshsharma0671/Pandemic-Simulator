@@ -48,6 +48,16 @@ public class WindowGraph : MonoBehaviour
     private GameObject CreateCircle(Vector2 anchoredPosition)
     {
         GameObject gameObject = new GameObject("circle", typeof(Image));
+
+        if(infected)
+        {
+            gameObject.GetComponent<Image>().color = new Color(255,0,0,0);
+        }
+        else
+        {
+            gameObject.GetComponent<Image>().color = new Color(1,1,1,0);
+        }
+     
         gameObject.transform.SetParent(graphContainer, false);
         gameObject.GetComponent<Image>().sprite = circlesprite;
         RectTransform recttransform = gameObject.GetComponent<RectTransform>();
@@ -88,15 +98,23 @@ public class WindowGraph : MonoBehaviour
 
         for (int i =Mathf.Max((valueList.Count - maxvisibleValueAmount),0); i < valuelist.Count; i++)
         {
-            int value = valueList[i]; 
-            if (value > ymaximun)
-            {
-                ymaximun = value;
-            }
-            if(value < yminimum)
-            {
-                yminimum = value;
-            }
+            int value = valueList[i];
+            //    if (value > ymaximun)
+            //    {
+            //        ymaximun = value;
+            //    }
+            //    if(value < yminimum)
+            //    {
+            //        yminimum = value;
+            //    }
+
+            ymaximun = 17;
+            yminimum = 0;
+
+
+
+
+
         }
         float ydifference = ymaximun - yminimum;
         if(ydifference <= 0)
