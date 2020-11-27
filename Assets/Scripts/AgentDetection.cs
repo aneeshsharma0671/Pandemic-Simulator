@@ -18,6 +18,7 @@ public class AgentDetection : MonoBehaviour
                 if(CheckInfection(agent))
                 {
                   other.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infect();
+                    StartCoroutine(Cure_after(other.gameObject, 100f));
                 }
             }
         }
@@ -32,5 +33,13 @@ public class AgentDetection : MonoBehaviour
    public bool CheckInfection(Collider agent)
     {
         return agent.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infected;
+    }
+
+    IEnumerator Cure_after(GameObject agent , float t)
+    {
+        Debug.Log(agent.transform.parent.gameObject.name + "got infected");
+        yield return new WaitForSeconds(t);
+        agent.transform.parent.gameObject.GetComponent<AgentController>().Cure();
+        Debug.Log(agent.transform.parent.gameObject.name + "got cured");
     }
 }

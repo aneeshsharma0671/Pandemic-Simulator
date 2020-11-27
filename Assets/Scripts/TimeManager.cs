@@ -24,4 +24,6 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = modifiedScale;
     }
 
+ 
+
 }

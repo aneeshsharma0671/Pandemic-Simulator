@@ -15,10 +15,15 @@ public class AgentController : MonoBehaviour
     private bool p=true;
     private int random;
     private bool record=true;
+
+
     public bool not_infected = true;
     public bool infected = false;
     public bool cured = false;
+
+
     public Material infected_color;
+    public Material cured_color;
 
     public GameObject GameManager;
 
@@ -113,7 +118,7 @@ public class AgentController : MonoBehaviour
         GameObject GameManager;
         GameManager = GameObject.Find("GameManager");
      
-        if (!infected)
+        if (!infected && !cured)
         {
         not_infected = false;
         infected = true;
@@ -121,6 +126,23 @@ public class AgentController : MonoBehaviour
         agent.GetComponentInChildren<Renderer>().material = infected_color;
         GameManager.GetComponent<InfectionManager>().no_of_infected++;
         GameManager.GetComponent<InfectionManager>().no_of_healthy--;
+        }
+    }
+
+    public void Cure()
+    {
+        GameObject GameManager;
+        GameManager = GameObject.Find("GameManager");
+
+        if(infected && !cured)
+        {
+            not_infected = false;
+            infected = false;
+            cured = true;
+
+            agent.GetComponentInChildren<Renderer>().material = cured_color;
+            GameManager.GetComponent<InfectionManager>().no_of_infected--;
+            GameManager.GetComponent<InfectionManager>().no_of_cured++;
         }
     }
         

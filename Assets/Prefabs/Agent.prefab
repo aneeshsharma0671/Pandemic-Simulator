@@ -92,6 +92,7 @@ MonoBehaviour:
   infected: 0
   cured: 0
   infected_color: {fileID: 2100000, guid: 1e39dcab3eb3627438ecf8cecbaf471b, type: 2}
+  cured_color: {fileID: 2100000, guid: 664fb8aac2e2c7941b4ac33b5e96af0c, type: 2}
   GameManager: {fileID: 0}
 --- !u!54 &3473447594126262223
 Rigidbody:
