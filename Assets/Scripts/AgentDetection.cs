@@ -12,7 +12,6 @@ public class AgentDetection : MonoBehaviour
     {
         if(!NoA.Contains(other))
         {
-            NoA.Add(other);
             foreach(var agent in NoA)
             {
                 if(CheckInfection(agent))
@@ -21,6 +20,7 @@ public class AgentDetection : MonoBehaviour
                     StartCoroutine(Cure_after(other.gameObject, 100f));
                 }
             }
+            NoA.Add(other);
         }
     }
     private void OnTriggerExit(Collider other)
