@@ -413,7 +413,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.07666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 7578507a875c65b4b87614d20af39bf3, type: 2}
 --- !u!1 &263972572
@@ -1968,7 +1968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 984005683947116955, guid: d203b2140ef392d4ca67f0176f217755, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.36544
+      value: -20.64
       objectReference: {fileID: 0}
     - target: {fileID: 984005683947116955, guid: d203b2140ef392d4ca67f0176f217755, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2276,6 +2276,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 984005683947116953, guid: d203b2140ef392d4ca67f0176f217755, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 984005683947116954, guid: d203b2140ef392d4ca67f0176f217755, type: 3}
       propertyPath: m_Name
       value: Agent
