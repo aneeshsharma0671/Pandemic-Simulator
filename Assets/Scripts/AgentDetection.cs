@@ -6,7 +6,13 @@ using UnityEngine;
 public class AgentDetection : MonoBehaviour
 {
     public List<Collider> NoA = new List<Collider>();
+    public GameObject Gamemanger;
     public int num_of_agents = 0;
+
+    void Start()
+    {
+        Gamemanger = GameObject.Find("GameManager");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,8 +22,16 @@ public class AgentDetection : MonoBehaviour
             {
                 if(CheckInfection(agent))
                 {
-                  other.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infect();
-                    StartCoroutine(Cure_after(other.gameObject, 100f));
+                    if(Random.value > (1-((Gamemanger.GetComponent<InfectionManager>().chance_of_infection)/100)))
+                    {
+                        other.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infect();
+                        StartCoroutine(Cure_after(other.gameObject, 100f));
+                    }
+                    else
+                    {
+                        Debug.Log(other.gameObject.transform.parent.gameObject.name + "didn't get infection");
+                    }
+                
                 }
             }
             NoA.Add(other);
@@ -35,7 +49,7 @@ public class AgentDetection : MonoBehaviour
         return agent.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infected;
     }
 
-    IEnumerator Cure_after(GameObject agent , float t)
+ public IEnumerator Cure_after(GameObject agent , float t)
     {
         Debug.Log(agent.transform.parent.gameObject.name + "got infected");
         yield return new WaitForSeconds(t);

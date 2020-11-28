@@ -8,6 +8,7 @@ public class InfectionManager : MonoBehaviour
     public int no_of_infected;
     public int no_of_healthy;
     public int no_of_cured;
+    public float chance_of_infection = 75;
     void Start()
     {
         no_of_healthy = 16;
@@ -15,6 +16,7 @@ public class InfectionManager : MonoBehaviour
         no_of_cured = 0;
         agents[Random.Range(0, 15)].GetComponent<AgentController>().infect();
     }
+
     void Update()
     {
         

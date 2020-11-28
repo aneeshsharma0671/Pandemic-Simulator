@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &109991447
 BoxCollider:
@@ -189,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &132433107
 BoxCollider:
@@ -614,6 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &325669106
 BoxCollider:
@@ -719,6 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &394565207
 BoxCollider:
@@ -767,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &468830181
 BoxCollider:
@@ -815,6 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &522536236
 BoxCollider:
@@ -887,6 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &592676117
 BoxCollider:
@@ -1100,6 +1107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &659415276
 BoxCollider:
@@ -1148,6 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &685337097
 BoxCollider:
@@ -1268,6 +1277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &839397107
 BoxCollider:
@@ -1630,6 +1640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &1052528612
 BoxCollider:
@@ -1678,6 +1689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &1057031229
 BoxCollider:
@@ -1746,6 +1758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &1152560674
 BoxCollider:
@@ -1865,6 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &1217176592
 BoxCollider:
@@ -1913,6 +1927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &1248467739
 BoxCollider:
@@ -2484,6 +2499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NoA: []
+  Gamemanger: {fileID: 0}
   num_of_agents: 0
 --- !u!65 &1560180366
 BoxCollider:
@@ -2719,7 +2735,7 @@ PrefabInstance:
     - target: {fileID: 4761909715315347258, guid: d589940651310f9419c900c807ec825c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 624d4485862da8840946147ec5749970, type: 2}
+      objectReference: {fileID: 2100000, guid: 22c3aa83ff5e6954bb211aba73fd72aa, type: 2}
     - target: {fileID: 5007773426385180411, guid: d589940651310f9419c900c807ec825c, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2755,7 +2771,7 @@ PrefabInstance:
     - target: {fileID: 8393477577243721543, guid: d589940651310f9419c900c807ec825c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 624d4485862da8840946147ec5749970, type: 2}
+      objectReference: {fileID: 2100000, guid: 22c3aa83ff5e6954bb211aba73fd72aa, type: 2}
     - target: {fileID: 8450259612027754815, guid: d589940651310f9419c900c807ec825c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3633,6 +3649,7 @@ MonoBehaviour:
   no_of_infected: 0
   no_of_healthy: 0
   no_of_cured: 0
+  chance_of_infection: 30
 --- !u!1 &2123027826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 984005683947116954, guid: d203b2140ef392d4ca67f0176f217755, type: 3}
