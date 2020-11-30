@@ -25,7 +25,8 @@ public class AgentDetection : MonoBehaviour
                     if(Random.value > (1-((Gamemanger.GetComponent<InfectionManager>().chance_of_infection)/100)))
                     {
                         other.gameObject.transform.parent.gameObject.GetComponent<AgentController>().infect();
-                        StartCoroutine(Cure_after(other.gameObject, 100f));
+                        StartCoroutine(Cure_after(other.gameObject.transform.parent.gameObject, 100f));
+                 
                     }
                     else
                     {
@@ -51,9 +52,9 @@ public class AgentDetection : MonoBehaviour
 
  public IEnumerator Cure_after(GameObject agent , float t)
     {
-        Debug.Log(agent.transform.parent.gameObject.name + "got infected");
+        Debug.Log(agent.name + "got infected");
         yield return new WaitForSeconds(t);
-        agent.transform.parent.gameObject.GetComponent<AgentController>().Cure();
-        Debug.Log(agent.transform.parent.gameObject.name + "got cured");
+        agent.GetComponent<AgentController>().Cure();
+        Debug.Log(agent.name + "got cured");
     }
 }

@@ -8,14 +8,16 @@ using System.Reflection.Emit;
 
 public class WindowGraph : MonoBehaviour
 {
-    [SerializeField] private Sprite circlesprite;
+    [SerializeField] private Sprite dotsprite;
     private RectTransform graphContainer;
     private RectTransform labeltemplatex;
     private RectTransform labeltemplatey;
     private List<GameObject> gameobjectList;
     public GameObject GameManager;
-    public  List<int> valueList = new List<int> {0};
+    public  List<int> valueList = new List<int> {};
     public bool infected;
+    public bool cured;
+    public int width_of_graph;
     private void Awake()
     {
         graphContainer = transform.Find("Graph_container").GetComponent<RectTransform>();
@@ -27,39 +29,56 @@ public class WindowGraph : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
+        {
+            width_of_graph = (Mathf.RoundToInt(GameManager.GetComponent<TimeManager>().t) / 20)+1;
+        }
         if (infected)
         {
             if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
             {
                 valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_infected);
-                ShowGraph(valueList, 10, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
+                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
+            }
+        }
+        else if (cured)
+        {
+            if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
+            {
+                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_cured + GameManager.GetComponent<InfectionManager>().no_of_infected);
+                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
             }
         }
         else
         {
             if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
             {
-                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_healthy);
-                ShowGraph(valueList, 10, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
+                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_cured + GameManager.GetComponent<InfectionManager>().no_of_infected + GameManager.GetComponent<InfectionManager>().no_of_healthy);
+                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
             }
+
         }
        
     }
-    private GameObject CreateCircle(Vector2 anchoredPosition)
+    private GameObject CreateDot(Vector2 anchoredPosition)
     {
-        GameObject gameObject = new GameObject("circle", typeof(Image));
+        GameObject gameObject = new GameObject("dot", typeof(Image));
 
         if(infected)
         {
             gameObject.GetComponent<Image>().color = new Color(255,0,0,0);
         }
-        else
+        else if (cured)
         {
             gameObject.GetComponent<Image>().color = new Color(1,1,1,0);
         }
+        else
+        {
+            gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        }
      
         gameObject.transform.SetParent(graphContainer, false);
-        gameObject.GetComponent<Image>().sprite = circlesprite;
+        gameObject.GetComponent<Image>().sprite = dotsprite;
         RectTransform recttransform = gameObject.GetComponent<RectTransform>();
         recttransform.anchoredPosition = anchoredPosition;
         recttransform.sizeDelta = new Vector2(11, 11);
@@ -109,7 +128,7 @@ public class WindowGraph : MonoBehaviour
             //    }
 
             ymaximun = 17;
-            yminimum = 0;
+            yminimum = 3;
 
 
 
@@ -127,24 +146,30 @@ public class WindowGraph : MonoBehaviour
         float xsize = graphWidth / (maxvisibleValueAmount+1);
 
         int xIndex = 0;
-        GameObject lastcirclegameobject = null;
+         //GameObject lastdotgameobject = null;
         for (int i = Mathf.Max((valueList.Count - maxvisibleValueAmount), 0); i < valuelist.Count; i++)
         {
-            float xposition = xIndex * xsize;
+            float xposition =xsize+ xIndex * xsize;
             float yposition = ((valuelist[i]-yminimum) / (ymaximun-yminimum)) * graphHeight;
-          GameObject circlegameobject =  CreateCircle(new Vector2(xposition, yposition));
-            gameobjectList.Add(circlegameobject);
-            if(lastcirclegameobject != null) 
+            GameObject barGameObject =  CreateBar(new Vector2(xposition,yposition), xsize);
+            gameobjectList.Add(barGameObject);
+
+            /*
+          GameObject dotgameobject =  CreateDot(new Vector2(xposition, yposition));
+            gameobjectList.Add(dotgameobject);
+            if(lastdotgameobject != null) 
             {
-             GameObject dotconnectiongameobject = CreateDotConnection(lastcirclegameobject.GetComponent<RectTransform>().anchoredPosition, circlegameobject.GetComponent<RectTransform>().anchoredPosition);
+             GameObject dotconnectiongameobject = CreateDotConnection(lastdotgameobject.GetComponent<RectTransform>().anchoredPosition, dotgameobject.GetComponent<RectTransform>().anchoredPosition);
                 gameobjectList.Add(dotconnectiongameobject);
             }
-            lastcirclegameobject = circlegameobject;
+            lastdotgameobject = dotgameobject;
+            */
+
 
             RectTransform labelX = Instantiate(labeltemplatex);
             labelX.SetParent(graphContainer);
             labelX.gameObject.SetActive(true);
-            labelX.anchoredPosition = new Vector2(xposition, -7f);
+            labelX.anchoredPosition = new Vector2(xposition, -20f);
             labelX.GetComponent<Text>().text = getAxisLabelX(i);
             gameobjectList.Add(labelX.gameObject);
 
@@ -166,17 +191,25 @@ public class WindowGraph : MonoBehaviour
     {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
         gameObject.transform.SetParent(graphContainer, false);
-      
+    
+        
+
 
         if(infected)
         {
             gameObject.GetComponent<Image>().color = new Color(255, 0, 0, 0.5f);
+        } 
+        else if (cured)
+        {
+            gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
         }
         else
         {
             gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
         }
     
+
+
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         Vector2 dir = (dotPositionB - dotPositionA).normalized;
         float distance = Vector2.Distance(dotPositionA, dotPositionB);
@@ -186,6 +219,33 @@ public class WindowGraph : MonoBehaviour
         rectTransform.anchoredPosition = dotPositionA + dir*distance*0.5f;
         rectTransform.localEulerAngles = new Vector3(0, 0,UtilsClass.GetAngleFromVectorFloat(dir));
 
+        return gameObject;
+    }
+
+    private GameObject CreateBar(Vector2 graphPosition , float barWidth)
+    {
+        GameObject gameObject = new GameObject("bar", typeof(Image));
+      
+       if (infected)
+        {
+            gameObject.GetComponent<Image>().color = new Color(255, 0, 0, 255);
+        }
+        else if (cured)
+        {
+            gameObject.GetComponent<Image>().color = new Color(255, 255, 0, 255);
+        }
+        else
+        {
+            gameObject.GetComponent<Image>().color = new Color(1, 255, 1, 255);
+        } 
+       
+        gameObject.transform.SetParent(graphContainer, false);
+        RectTransform recttransform = gameObject.GetComponent<RectTransform>();
+        recttransform.anchoredPosition = new Vector2(graphPosition.x,0f);
+        recttransform.sizeDelta = new Vector2(barWidth , graphPosition.y);
+        recttransform.anchorMin = new Vector2(0, 0);
+        recttransform.anchorMax = new Vector2(0, 0);
+        recttransform.pivot = new Vector2(.5f,0f);
         return gameObject;
     }
 }

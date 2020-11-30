@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    [Range(0.1f, 5)]
+    [Range(0.1f, 15)]
     public float modifiedScale;
 
     public float t;
