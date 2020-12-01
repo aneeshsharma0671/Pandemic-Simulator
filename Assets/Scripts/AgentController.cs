@@ -109,7 +109,7 @@ public class AgentController : MonoBehaviour
     }
     bool houseLimit(Transform house)
     {
-        return house.GetComponent<AgentDetection>().num_of_agents < 2;
+        return house.GetComponent<AgentDetection>().num_of_agents < GameManager.GetComponent<SpawnAgent>().building_limit;
     }
     public void infect()
     {

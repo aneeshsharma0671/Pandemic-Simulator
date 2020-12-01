@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class InfectionManager : MonoBehaviour
 {
-    public GameObject[] agents;
     public AgentDetection agentdetection;
     private int random;
-
     public int no_of_infected;
     public int no_of_healthy;
     public int no_of_cured;
-    public float chance_of_infection = 75;
+    public float chance_of_infection;
     void Start()
     {
-        for (int i = 0; i < 16; i++)
-        {
-            agents[i] = GameObject.Find("Agent (" + (i) + ")");
-        }
-        random = Random.Range(0, 15);
-        no_of_healthy = 16;
+        
+        random = Random.Range(0, (gameObject.GetComponent<SpawnAgent>().no_of_agents - 1));
+        no_of_healthy = gameObject.GetComponent<SpawnAgent>().no_of_agents;
         no_of_infected = 0;
         no_of_cured = 0;
-        agents[random].GetComponent<AgentController>().infect();
-        StartCoroutine(agentdetection.Cure_after(agents[random],100f));
+        gameObject.GetComponent<SpawnAgent>().Agents[random].GetComponent<AgentController>().infect();
+        StartCoroutine(agentdetection.Cure_after(gameObject.GetComponent<SpawnAgent>().Agents[random], 100f));
     }
 
     void Update()
