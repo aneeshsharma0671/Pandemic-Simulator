@@ -45,7 +45,7 @@ public class WindowGraph : MonoBehaviour
         {
             if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
             {
-                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_cured + GameManager.GetComponent<InfectionManager>().no_of_infected);
+                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_cured);
                 ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
             }
         }
@@ -53,7 +53,7 @@ public class WindowGraph : MonoBehaviour
         {
             if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
             {
-                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_cured + GameManager.GetComponent<InfectionManager>().no_of_infected + GameManager.GetComponent<InfectionManager>().no_of_healthy);
+                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_healthy);
                 ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
             }
 
@@ -127,8 +127,8 @@ public class WindowGraph : MonoBehaviour
             //        yminimum = value;
             //    }
 
-            ymaximun = 17;
-            yminimum = 3;
+            ymaximun = 70;
+            yminimum = 0;
 
 
 
@@ -146,15 +146,15 @@ public class WindowGraph : MonoBehaviour
         float xsize = graphWidth / (maxvisibleValueAmount+1);
 
         int xIndex = 0;
-         //GameObject lastdotgameobject = null;
+         GameObject lastdotgameobject = null;
         for (int i = Mathf.Max((valueList.Count - maxvisibleValueAmount), 0); i < valuelist.Count; i++)
         {
             float xposition =xsize+ xIndex * xsize;
             float yposition = ((valuelist[i]-yminimum) / (ymaximun-yminimum)) * graphHeight;
-            GameObject barGameObject =  CreateBar(new Vector2(xposition,yposition), xsize);
-            gameobjectList.Add(barGameObject);
+          //  GameObject barGameObject =  CreateBar(new Vector2(xposition,yposition), xsize);
+          //  gameobjectList.Add(barGameObject);
 
-            /*
+            
           GameObject dotgameobject =  CreateDot(new Vector2(xposition, yposition));
             gameobjectList.Add(dotgameobject);
             if(lastdotgameobject != null) 
@@ -163,7 +163,7 @@ public class WindowGraph : MonoBehaviour
                 gameobjectList.Add(dotconnectiongameobject);
             }
             lastdotgameobject = dotgameobject;
-            */
+            
 
 
             RectTransform labelX = Instantiate(labeltemplatex);
@@ -205,7 +205,7 @@ public class WindowGraph : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+            gameObject.GetComponent<Image>().color = new Color(0, 255, 0, 0.5f);
         }
     
 

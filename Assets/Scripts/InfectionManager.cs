@@ -16,8 +16,8 @@ public class InfectionManager : MonoBehaviour
     void Start()
     {
         sceneManager = GameObject.Find("SceneManager");
-        no_of_initial_infections = sceneManager.GetComponent<SceneManagment>().no_of_initial_infections;
-        chance_of_infection = sceneManager.GetComponent<SceneManagment>().chance_of_infection;
+      //  no_of_initial_infections = sceneManager.GetComponent<SceneManagment>().no_of_initial_infections;
+      //  chance_of_infection = sceneManager.GetComponent<SceneManagment>().chance_of_infection;
 
         randomNumbers = new int[no_of_initial_infections];
         var numbers = new List<int> (gameObject.GetComponent<SpawnAgent>().no_of_agents);

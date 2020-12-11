@@ -29,7 +29,7 @@ public class AgentController : MonoBehaviour
     {
         GameManager = GameObject.Find("GameManager");
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 32; i++)
         {
             buildings[i] = GameObject.Find("WS" + (i+1)).transform;
             houses[i] = GameObject.Find("House" + (i+1)).transform;
@@ -48,6 +48,7 @@ public class AgentController : MonoBehaviour
 
     void Update()
     {
+     
 
         t = GameManager.GetComponent<TimeManager>().t;
 
