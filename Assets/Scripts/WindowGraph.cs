@@ -32,32 +32,9 @@ public class WindowGraph : MonoBehaviour
         if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
         {
             width_of_graph = (Mathf.RoundToInt(GameManager.GetComponent<TimeManager>().t) / 20)+1;
+            drawGraph();
         }
-        if (infected)
-        {
-            if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
-            {
-                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_infected);
-                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
-            }
-        }
-        else if (cured)
-        {
-            if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
-            {
-                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_cured);
-                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
-            }
-        }
-        else
-        {
-            if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
-            {
-                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_healthy);
-                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
-            }
-
-        }
+      
        
     }
     private GameObject CreateDot(Vector2 anchoredPosition)
@@ -247,5 +224,25 @@ public class WindowGraph : MonoBehaviour
         recttransform.anchorMax = new Vector2(0, 0);
         recttransform.pivot = new Vector2(.5f,0f);
         return gameObject;
+    }
+
+    public void drawGraph()
+    {
+        if (infected)
+        {
+                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_infected);
+                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));        
+        }
+        else if (cured)
+        {        
+                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_cured);
+                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));         
+        }
+        else
+        {
+           
+                valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_healthy);
+                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
+        }
     }
 }
