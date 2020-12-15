@@ -127,7 +127,7 @@ public class WindowGraph : MonoBehaviour
             //        yminimum = value;
             //    }
 
-            ymaximun = 135;
+            ymaximun = 128;
             yminimum = 0;
 
 
@@ -140,8 +140,8 @@ public class WindowGraph : MonoBehaviour
         {
             ydifference = 5f;
         }
-        ymaximun = ymaximun + (ydifference) * 0.2f;
-        yminimum = yminimum - (ydifference) * 0.2f;
+    //    ymaximun = ymaximun + (ydifference) * 0.2f;
+    //    yminimum = yminimum - (ydifference) * 0.2f;
 
         float xsize = graphWidth / (maxvisibleValueAmount+1);
 
@@ -175,10 +175,19 @@ public class WindowGraph : MonoBehaviour
 
             xIndex++;
         }
-        int seperatorCount = 10;
+
+
+
+         
+        int seperatorCount = 10;     // seperatory
+
+
+
+
+
         for (int i = 0; i <= seperatorCount; i++)
         {
-            RectTransform labely = Instantiate(labeltemplatex);
+            RectTransform labely = Instantiate(labeltemplatey);
             labely.SetParent(graphContainer);
             labely.gameObject.SetActive(true);
             float normalizedvalue = i * 1.0f / seperatorCount;
@@ -255,21 +264,21 @@ public void DrawGraph()
         {
           
                
-                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
+                ShowGraph(valueList, width_of_graph, (int _i) => "" + ((_i - 1)*20), (float _f) => "" + Mathf.RoundToInt(_f));
             
         }
         else if (cured)
         {
            
               
-                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
+                ShowGraph(valueList, width_of_graph, (int _i) => "" + ((_i - 1)*20), (float _f) => "" + Mathf.RoundToInt(_f));
            
         }
         else
         {
            
                
-                ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
+                ShowGraph(valueList, width_of_graph, (int _i) => "" + ((_i - 1)*20), (float _f) => "" + Mathf.RoundToInt(_f));
             
 
         }

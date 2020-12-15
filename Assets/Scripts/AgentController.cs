@@ -125,6 +125,7 @@ public class AgentController : MonoBehaviour
         agent.GetComponentInChildren<Renderer>().material = infected_color;
         GameManager.GetComponent<InfectionManager>().no_of_infected++;
         GameManager.GetComponent<InfectionManager>().no_of_healthy--;
+            GameManager.GetComponent<InfectionManager>().NI++;
         }
     }
 

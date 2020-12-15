@@ -16,10 +16,10 @@ public class SpawnAgent : MonoBehaviour
     private void Awake()
     {
         platform = GameObject.Find("Platform").transform;
-      //  sceneManager = GameObject.Find("SceneManager");
-      //  no_of_agents = sceneManager.GetComponent<SceneManagment>().no_of_agents;
-      //  no_of_buildings = sceneManager.GetComponent<SceneManagment>().no_of_buildings;
-      //  building_limit = sceneManager.GetComponent<SceneManagment>().building_limit;
+        sceneManager = GameObject.Find("SceneManager");
+        no_of_agents = sceneManager.GetComponent<SceneManagment>().no_of_agents;
+        no_of_buildings = sceneManager.GetComponent<SceneManagment>().no_of_buildings;
+        building_limit = sceneManager.GetComponent<SceneManagment>().building_limit;
 
         buildings = new Transform[no_of_buildings];
         Agents = new GameObject[no_of_agents];
@@ -35,6 +35,7 @@ public class SpawnAgent : MonoBehaviour
             Agents[i] = GameObject.Instantiate(AgentPrefab,platform);
             Agents[i].name = count;
             Agents[i].transform.position = buildings[Mathf.RoundToInt(i / building_limit + 0.01f)].transform.position;
+            Debug.Log(Mathf.RoundToInt(i / building_limit + 0.01f));
         }
     }
 

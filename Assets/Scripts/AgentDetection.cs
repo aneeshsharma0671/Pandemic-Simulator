@@ -30,7 +30,7 @@ public class AgentDetection : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log(other.gameObject.transform.parent.gameObject.name + "didn't get infection");
+                   //     Debug.Log(other.gameObject.transform.parent.gameObject.name + "didn't get infection");
                     }
                 
                 }
@@ -52,9 +52,9 @@ public class AgentDetection : MonoBehaviour
 
  public IEnumerator Cure_after(GameObject agent , float t)
     {
-        Debug.Log(agent.name + "got infected");
+      //  Debug.Log(agent.name + "got infected");
         yield return new WaitForSeconds(t);
         agent.GetComponent<AgentController>().Cure();
-        Debug.Log(agent.name + "got cured");
+      //  Debug.Log(agent.name + "got cured");
     }
 }

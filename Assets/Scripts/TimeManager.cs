@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class TimeManager : MonoBehaviour
     public float modifiedScale;
 
     public float t;
+    public Slider speed;
 
     private void Start()
     {
@@ -16,12 +18,15 @@ public class TimeManager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        t =Time.fixedTime;
 
+        t = (float)System.Math.Round(t + Time.fixedDeltaTime, 2);
     }
     private void Update()
     {
+        modifiedScale = speed.value;
         Time.timeScale = modifiedScale;
+
+     
     }
 
  

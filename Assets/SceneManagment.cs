@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 using System;
 
 public class SceneManagment : MonoBehaviour
@@ -15,19 +16,30 @@ public class SceneManagment : MonoBehaviour
     public InputField no_of_agent_field;
     public InputField no_of_building_field;
     public InputField building_limit_field;
+    public TMP_Text no_of_agent_text;
+    public Slider no_of_agent_slider;
+    public TMP_Text no_of_infected_text;
+    public Slider no_of_infected_slider;
+  
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
+    private void Update()
+    {
+        no_of_agent_text.text ="" + no_of_agent_slider.value;
+        no_of_infected_text.text = "" + no_of_infected_slider.value;
+    }
 
     public void LoadSimulation()
     {
-        no_of_agents = Convert.ToInt32(no_of_agent_field.text);
-        no_of_buildings = Convert.ToInt32(no_of_building_field.text);
-        building_limit = Convert.ToInt32(building_limit_field.text);
+        no_of_agents =Mathf.FloorToInt(no_of_agent_slider.value);
+        no_of_initial_infections = Mathf.FloorToInt(no_of_infected_slider.value);
         
         SceneManager.LoadScene(1,LoadSceneMode.Single);
+
+    
 
     }
 }

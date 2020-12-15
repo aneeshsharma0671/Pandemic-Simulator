@@ -22,4 +22,10 @@ public class UIManager : MonoBehaviour
             DetailsPanel.SetActive(true);
         }
     }
+    public void DetailsPanels()
+    {
+      
+            DetailsPanel.SetActive(true);
+        
+    }
 }
