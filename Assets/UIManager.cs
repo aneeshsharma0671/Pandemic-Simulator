@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -27,5 +28,9 @@ public class UIManager : MonoBehaviour
       
             DetailsPanel.SetActive(true);
         
+    }
+    public void ExitSimulation()
+    {
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }

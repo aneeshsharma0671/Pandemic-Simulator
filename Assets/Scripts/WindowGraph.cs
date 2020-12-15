@@ -29,13 +29,13 @@ public class WindowGraph : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
+        if (GameManager.GetComponent<TimeManager>().t % 20 == 0 && GameManager.GetComponent<InfectionManager>().no_of_infected > 0)
         {
             width_of_graph = (Mathf.RoundToInt(GameManager.GetComponent<TimeManager>().t) / 20)+1;
         }
         if (infected)
         {
-            if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
+            if (GameManager.GetComponent<TimeManager>().t % 20 == 0 && GameManager.GetComponent<InfectionManager>().no_of_infected > 0)
             {
                 valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_infected);
               //  ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
@@ -43,7 +43,7 @@ public class WindowGraph : MonoBehaviour
         }
         else if (cured)
         {
-            if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
+            if (GameManager.GetComponent<TimeManager>().t % 20 == 0 && GameManager.GetComponent<InfectionManager>().no_of_infected > 0)
             {
                 valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_cured);
               //  ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
@@ -51,7 +51,7 @@ public class WindowGraph : MonoBehaviour
         }
         else
         {
-            if (GameManager.GetComponent<TimeManager>().t % 20 == 0)
+            if (GameManager.GetComponent<TimeManager>().t % 20 == 0 && GameManager.GetComponent<InfectionManager>().no_of_infected > 0)
             {
                 valueList.Add(GameManager.GetComponent<InfectionManager>().no_of_healthy);
               //  ShowGraph(valueList, width_of_graph, (int _i) => "Time" + (_i + 1), (float _f) => "I" + Mathf.RoundToInt(_f));
