@@ -24,6 +24,7 @@ public class SceneManagment : MonoBehaviour
     public Slider infection_rate_slider;
     public GameObject MainPanel;
     public GameObject SimulationPanel;
+    public GameObject AboutPanel;
   
 
     private void Awake()
@@ -48,12 +49,20 @@ public class SceneManagment : MonoBehaviour
     public void Play()
     {
         MainPanel.gameObject.active = false;
+        AboutPanel.gameObject.active = false;
         SimulationPanel.gameObject.active = true;
+    }
+
+    public void About()
+    {
+        MainPanel.gameObject.active = false;
+        AboutPanel.gameObject.active = true;
     }
 
     public void Back()
     {
         SimulationPanel.gameObject.active = false;
+        AboutPanel.gameObject.active = false;
         MainPanel.gameObject.active = true;
       
     }
